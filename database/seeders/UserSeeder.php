@@ -12,6 +12,14 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        // 0. Akun Super Admin
+        \App\Models\User::create([
+            'name' => 'Super Administrator',
+            'email' => 'superadmin@iaipersis.ac.id',
+            'password' => bcrypt('password'),
+            'role' => 'super_admin',
+        ]);
+
         // 1. Akun Admin Koordinator
         \App\Models\User::create([
             'name' => 'Admin Microteaching',

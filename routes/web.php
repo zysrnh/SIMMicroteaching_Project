@@ -12,6 +12,13 @@ Route::get('/dashboard', function () {
     return redirect()->route($role . '.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// Super Admin Routes
+Route::middleware(['auth', 'verified', 'role:super_admin'])->prefix('super-admin')->name('super_admin.')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard', ['roleName' => 'Super Administrator']);
+    })->name('dashboard');
+});
+
 // Admin Routes
 Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', function () {

@@ -33,15 +33,7 @@ class UserController extends Controller
 
     public function downloadTemplate($role)
     {
-        // Untuk sekarang, kita kembalikan error/redirect jika belum membuat file Export
-        // Pada prakteknya kita bisa taruh file dummy di storage, misal:
-        $fileName = 'template_import_' . $role . '.xlsx';
-        $filePath = public_path('templates/' . $fileName);
-
-        if (file_exists($filePath)) {
-            return response()->download($filePath);
-        }
-
-        return back()->with('error', 'File template belum tersedia di server.');
+        $fileName = 'Template_Import_' . ucfirst($role) . '.xlsx';
+        return \Maatwebsite\Excel\Facades\Excel::download(new \App\Exports\UsersTemplateExport($role), $fileName);
     }
 }

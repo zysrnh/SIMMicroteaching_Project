@@ -19,6 +19,17 @@ Route::middleware(['auth', 'verified', 'role:super_admin'])->prefix('super-admin
     })->name('dashboard');
 });
 
+// Admin & Super Admin Shared Routes (for User Management)
+Route::middleware(['auth', 'verified'])->group(function () {
+    // Only super_admin or admin can access these user management routes
+    Route::middleware('role:super_admin,admin')->prefix('kelola')->name('admin.users.')->group(function () {
+        // We use a generic controller method that takes 'role' as a parameter (e.g. 'dosen' or 'mahasiswa')
+        Route::get('/{role}', [\App\Http\Controllers\Admin\UserController::class, 'index'])->name('index');
+        Route::post('/{role}/import', [\App\Http\Controllers\Admin\UserController::class, 'import'])->name('import');
+        Route::get('/{role}/template', [\App\Http\Controllers\Admin\UserController::class, 'downloadTemplate'])->name('template');
+    });
+});
+
 // Admin Routes
 Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', function () {

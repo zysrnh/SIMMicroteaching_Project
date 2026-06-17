@@ -14,9 +14,20 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email')->unique();
+            $table->string('nomor_induk')->unique()->nullable()->comment('NIM untuk Mahasiswa, NIDN/NIP untuk Dosen');
+            $table->string('email')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->enum('role', ['super_admin', 'admin', 'dosen', 'mahasiswa'])->default('mahasiswa');
+            
+            // Kolom khusus profil Mahasiswa/Dosen
+            $table->string('kelas')->nullable();
+            $table->string('semester')->nullable();
+            $table->string('tahun_ajaran')->nullable();
+            $table->string('angkatan')->nullable();
+            $table->string('no_telp')->nullable();
+            $table->string('mata_kuliah')->nullable();
+            $table->string('prodi')->nullable();
+
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

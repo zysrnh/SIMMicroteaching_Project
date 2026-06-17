@@ -14,6 +14,26 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                primary: {
+                    50: 'oklch(0.96 0.03 150)',
+                    100: 'oklch(0.92 0.06 150)',
+                    500: 'oklch(0.52 0.14 150)',
+                    600: 'oklch(0.45 0.12 150)',
+                    900: 'oklch(0.25 0.08 150)',
+                },
+                gold: {
+                    50: 'oklch(0.98 0.04 85)',
+                    100: 'oklch(0.95 0.08 85)',
+                    500: 'oklch(0.77 0.17 85)',
+                    600: 'oklch(0.68 0.15 85)',
+                },
+                accent: {
+                    50: 'oklch(0.97 0.03 260)',
+                    500: 'oklch(0.56 0.23 260)',
+                    600: 'oklch(0.48 0.20 260)',
+                }
+            }
         },
     },
 

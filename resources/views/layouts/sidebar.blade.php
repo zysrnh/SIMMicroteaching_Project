@@ -7,7 +7,9 @@
     <div class="h-16 flex items-center px-6 border-b border-gray-50 dark:border-slate-700">
         <a href="/" class="flex items-center gap-3">
             <img src="{{ asset('images/logo.jpg') }}" alt="Logo" class="w-8 h-8 rounded-md object-contain">
-            <span class="font-bold text-primary-900 dark:text-slate-100 tracking-tight text-lg">SIM Microteaching</span>
+            <span class="font-bold text-primary-900 dark:text-slate-100 tracking-tight text-lg">SIM Microteaching
+                
+            </span>
         </a>
     </div>
 

@@ -27,6 +27,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/{role}', [\App\Http\Controllers\Admin\UserController::class, 'index'])->name('index');
         Route::post('/{role}/import', [\App\Http\Controllers\Admin\UserController::class, 'import'])->name('import');
         Route::get('/{role}/template', [\App\Http\Controllers\Admin\UserController::class, 'downloadTemplate'])->name('template');
+        Route::get('/{role}/export', [\App\Http\Controllers\Admin\UserController::class, 'export'])->name('export');
         
         // CRUD Routes
         Route::get('/{role}/create', [\App\Http\Controllers\Admin\UserController::class, 'create'])->name('create');

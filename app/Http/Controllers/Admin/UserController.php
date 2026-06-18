@@ -38,6 +38,17 @@ class UserController extends Controller
         return \Maatwebsite\Excel\Facades\Excel::download(new \App\Exports\UsersTemplateExport($role), $fileName);
     }
 
+    public function export($role)
+    {
+        $allowedRoles = auth()->user()->role === 'super_admin' ? ['admin', 'dosen', 'mahasiswa'] : ['dosen', 'mahasiswa'];
+        if (!in_array($role, $allowedRoles)) {
+            abort(404);
+        }
+
+        $fileName = 'Data_' . ucfirst($role) . '_' . date('Ymd_His') . '.xlsx';
+        return \Maatwebsite\Excel\Facades\Excel::download(new \App\Exports\UsersExport($role), $fileName);
+    }
+
     public function create($role)
     {
         $allowedRoles = auth()->user()->role === 'super_admin' ? ['admin', 'dosen', 'mahasiswa'] : ['dosen', 'mahasiswa'];

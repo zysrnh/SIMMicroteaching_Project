@@ -7,14 +7,29 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function index($role)
+    public function index(Request $request, $role)
     {
         $allowedRoles = auth()->user()->role === 'super_admin' ? ['admin', 'dosen', 'mahasiswa'] : ['dosen', 'mahasiswa'];
         if (!in_array($role, $allowedRoles)) {
             abort(404);
         }
 
-        $users = \App\Models\User::where('role', $role)->latest()->get();
+        $query = \App\Models\User::where('role', $role);
+
+        // Fitur Pencarian (Search)
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('nomor_induk', 'like', "%{$search}%")
+                  ->orWhere('prodi', 'like', "%{$search}%")
+                  ->orWhere('mata_kuliah', 'like', "%{$search}%");
+            });
+        }
+
+        // Fitur Pagination (10 data per halaman)
+        $users = $query->latest()->paginate(10)->withQueryString();
+        
         return view('admin.users.index', compact('users', 'role'));
     }
 
@@ -159,7 +174,37 @@ class UserController extends Controller
             abort(404);
         }
 
+        // Fitur Auto Delete Avatar
+        if ($user->avatar && \Illuminate\Support\Facades\Storage::disk('public')->exists($user->avatar)) {
+            \Illuminate\Support\Facades\Storage::disk('public')->delete($user->avatar);
+        }
+
         $user->delete();
         return back()->with('success', 'Data ' . ucfirst($role) . ' berhasil dihapus!');
+    }
+
+    // Fitur Hapus Massal (Bulk Delete)
+    public function bulkDestroy(Request $request, $role)
+    {
+        $allowedRoles = auth()->user()->role === 'super_admin' ? ['admin', 'dosen', 'mahasiswa'] : ['dosen', 'mahasiswa'];
+        if (!in_array($role, $allowedRoles)) {
+            abort(404);
+        }
+
+        $ids = $request->ids;
+        if (!$ids || !is_array($ids)) {
+            return back()->with('error', 'Tidak ada data yang dipilih.');
+        }
+
+        $users = \App\Models\User::where('role', $role)->whereIn('id', $ids)->get();
+        
+        foreach ($users as $user) {
+            if ($user->avatar && \Illuminate\Support\Facades\Storage::disk('public')->exists($user->avatar)) {
+                \Illuminate\Support\Facades\Storage::disk('public')->delete($user->avatar);
+            }
+            $user->delete();
+        }
+
+        return back()->with('success', count($ids) . ' data ' . ucfirst($role) . ' berhasil dihapus secara massal!');
     }
 }

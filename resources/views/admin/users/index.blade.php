@@ -29,34 +29,61 @@
                             <h3 class="text-lg font-bold text-gray-900 dark:text-[#E0E0E0]">Daftar {{ ucfirst($role) }}</h3>
                             <p class="text-sm text-gray-500 dark:text-[#848484]">Kelola data, upload excel, dan hapus data {{ $role }}.</p>
                         </div>
-                        <div class="flex flex-wrap gap-2">
-                            <a href="{{ route('admin.users.create', $role) }}" class="inline-flex items-center px-4 py-2 bg-accent-600 border border-transparent rounded font-semibold text-xs text-white uppercase tracking-widest hover:bg-accent-700 hover:-translate-y-0.5 hover:shadow-md focus:bg-accent-700 active:bg-accent-800 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2 transform transition-all duration-200">
-                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-                                Tambah Data
-                            </a>
-                            <a href="{{ route('admin.users.export', $role) }}" class="inline-flex items-center px-4 py-2 bg-green-600 border border-transparent rounded font-semibold text-xs text-white uppercase tracking-widest shadow-sm hover:bg-green-700 hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 disabled:opacity-25 transform transition-all duration-200">
-                                <svg class="w-4 h-4 mr-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                                Export Data
-                            </a>
-                            <a href="{{ route('admin.users.template', $role) }}" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 disabled:opacity-25 transform transition-all duration-200">
-                                <svg class="w-4 h-4 mr-2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                                Template Excel
-                            </a>
-                            <button onclick="document.getElementById('importModal').classList.remove('hidden')" class="inline-flex items-center px-4 py-2 bg-primary-600 border border-transparent rounded font-semibold text-xs text-white uppercase tracking-widest hover:bg-primary-700 hover:-translate-y-0.5 hover:shadow-md focus:bg-primary-700 active:bg-primary-800 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transform transition-all duration-200">
-                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
-                                Import Excel
-                            </button>
+                        
+                        <div class="flex flex-col sm:flex-row w-full md:w-auto items-center gap-3">
+                            <!-- Search Form -->
+                            <form action="{{ route('admin.users.index', $role) }}" method="GET" class="w-full sm:w-auto relative">
+                                <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari Nama/NIM/Prodi..." class="w-full sm:w-64 pl-10 pr-4 py-2 border-gray-300 dark:border-[#484848] dark:bg-[#2B2B2B] dark:text-[#E0E0E0] focus:border-primary-500 focus:ring-primary-500 rounded-md shadow-sm text-sm placeholder-gray-400">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                                </div>
+                            </form>
+
+                            <div class="flex flex-wrap gap-2 w-full sm:w-auto justify-end">
+                                <a href="{{ route('admin.users.create', $role) }}" class="inline-flex items-center px-4 py-2 bg-accent-600 border border-transparent rounded font-semibold text-xs text-white uppercase tracking-widest hover:bg-accent-700 hover:-translate-y-0.5 hover:shadow-md transform transition-all duration-200">
+                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                                    Tambah Data
+                                </a>
+                                <a href="{{ route('admin.users.export', $role) }}" class="inline-flex items-center px-4 py-2 bg-green-600 border border-transparent rounded font-semibold text-xs text-white uppercase tracking-widest shadow-sm hover:bg-green-700 hover:-translate-y-0.5 hover:shadow-md transform transition-all duration-200">
+                                    <svg class="w-4 h-4 mr-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                    Export
+                                </a>
+                                <a href="{{ route('admin.users.template', $role) }}" class="inline-flex items-center px-4 py-2 bg-white dark:bg-[#2B2B2B] border border-gray-300 dark:border-[#484848] rounded font-semibold text-xs text-gray-700 dark:text-[#E0E0E0] uppercase tracking-widest shadow-sm hover:bg-gray-50 dark:hover:bg-[#3a3a3a] hover:-translate-y-0.5 hover:shadow-md transform transition-all duration-200">
+                                    Template
+                                </a>
+                                <button onclick="document.getElementById('importModal').classList.remove('hidden')" class="inline-flex items-center px-4 py-2 bg-primary-600 border border-transparent rounded font-semibold text-xs text-white uppercase tracking-widest hover:bg-primary-700 hover:-translate-y-0.5 hover:shadow-md transform transition-all duration-200">
+                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                                    Import
+                                </button>
+                            </div>
                         </div>
                     </div>
 
+                    <!-- Bulk Delete Form Wrapper -->
+                    <form id="bulkDeleteForm" action="{{ route('admin.users.bulk_destroy', $role) }}" method="POST">
+                        @csrf
+                        
+                        <div class="mb-4 flex justify-between items-center bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded p-3 hidden" id="bulkActionContainer">
+                            <span class="text-sm text-red-700 dark:text-red-400 font-medium">
+                                <span id="selectedCount">0</span> data dipilih
+                            </span>
+                            <button type="button" onclick="confirmBulkDelete()" class="inline-flex items-center px-3 py-1.5 bg-red-600 border border-transparent rounded font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 hover:-translate-y-0.5 shadow-sm transform transition-all duration-200">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                Hapus Terpilih
+                            </button>
+                        </div>
+
                     <div class="overflow-x-auto">
                         <table class="min-w-full divide-y divide-gray-100 border border-gray-100 rounded">
-                            <thead class="bg-slate-50 rounded-t">
+                            <thead class="bg-slate-50 dark:bg-[#2B2B2B] rounded-t border-b border-gray-100 dark:border-[#484848]">
                                 <tr>
-                                    <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider rounded-tl">
+                                    <th scope="col" class="px-4 py-3 text-left w-12 rounded-tl">
+                                        <input type="checkbox" id="selectAll" class="rounded border-gray-300 text-primary-600 shadow-sm focus:ring-primary-500 dark:border-[#484848] dark:bg-[#3a3a3a]">
+                                    </th>
+                                    <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-gray-500 dark:text-[#848484] uppercase tracking-wider">
                                         {{ $role === 'mahasiswa' ? 'NIM' : ($role === 'dosen' ? 'NIDN/NIP' : 'ID Admin/NIP') }}
                                     </th>
-                                    <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Nama Lengkap</th>
+                                    <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-gray-500 dark:text-[#848484] uppercase tracking-wider">Nama Lengkap</th>
                                     
                                     @if($role === 'dosen')
                                     <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Mata Kuliah / Prodi</th>
@@ -72,7 +99,10 @@
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-50">
                                 @forelse ($users as $index => $user)
-                                    <tr class="hover:bg-slate-50/50 transition-colors opacity-0 animate-fade-in-up" style="animation-fill-mode: forwards; animation-delay: {{ $index * 50 }}ms;">
+                                    <tr class="hover:bg-slate-50/50 dark:hover:bg-[#565656]/30 transition-colors opacity-0 animate-fade-in-up" style="animation-fill-mode: forwards; animation-delay: {{ $index * 50 }}ms;">
+                                        <td class="px-4 py-3 whitespace-nowrap">
+                                            <input type="checkbox" name="ids[]" value="{{ $user->id }}" class="row-checkbox rounded border-gray-300 text-primary-600 shadow-sm focus:ring-primary-500 dark:border-[#484848] dark:bg-[#3a3a3a]">
+                                        </td>
                                         <td class="px-4 py-3 whitespace-nowrap">
                                             <div class="flex items-center">
                                                 <div class="flex-shrink-0 h-10 w-10 mr-3">
@@ -126,16 +156,22 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="5" class="px-4 py-8 text-center text-gray-500">
+                                        <td colspan="6" class="px-4 py-8 text-center text-gray-500 dark:text-[#848484]">
                                             <div class="flex flex-col items-center justify-center">
-                                                <svg class="w-12 h-12 text-gray-300 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path></svg>
-                                                Belum ada data {{ $role }} yang terdaftar.
+                                                <svg class="w-12 h-12 text-gray-300 dark:text-[#484848] mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path></svg>
+                                                Belum ada data {{ $role }} yang ditemukan.
                                             </div>
                                         </td>
                                     </tr>
                                 @endforelse
                             </tbody>
                         </table>
+                    </div>
+                    </form>
+
+                    <!-- Pagination -->
+                    <div class="mt-6">
+                        {{ $users->links() }}
                     </div>
                 </div>
             </div>
@@ -190,3 +226,43 @@
         </div>
     </div>
 </x-app-layout>
+
+<script>
+    // Bulk Select Logic
+    const selectAllCheckbox = document.getElementById('selectAll');
+    const rowCheckboxes = document.querySelectorAll('.row-checkbox');
+    const bulkActionContainer = document.getElementById('bulkActionContainer');
+    const selectedCountSpan = document.getElementById('selectedCount');
+
+    function updateBulkActionState() {
+        const checkedCount = document.querySelectorAll('.row-checkbox:checked').length;
+        selectedCountSpan.textContent = checkedCount;
+        
+        if (checkedCount > 0) {
+            bulkActionContainer.classList.remove('hidden');
+        } else {
+            bulkActionContainer.classList.add('hidden');
+        }
+        
+        selectAllCheckbox.checked = checkedCount === rowCheckboxes.length && rowCheckboxes.length > 0;
+    }
+
+    if (selectAllCheckbox) {
+        selectAllCheckbox.addEventListener('change', function() {
+            rowCheckboxes.forEach(checkbox => {
+                checkbox.checked = this.checked;
+            });
+            updateBulkActionState();
+        });
+    }
+
+    rowCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', updateBulkActionState);
+    });
+
+    function confirmBulkDelete() {
+        if (confirm('Anda yakin ingin menghapus semua data yang dipilih? Aksi ini tidak dapat dibatalkan.')) {
+            document.getElementById('bulkDeleteForm').submit();
+        }
+    }
+</script>

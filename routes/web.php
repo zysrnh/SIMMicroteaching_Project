@@ -28,6 +28,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/{role}/import', [\App\Http\Controllers\Admin\UserController::class, 'import'])->name('import');
         Route::get('/{role}/template', [\App\Http\Controllers\Admin\UserController::class, 'downloadTemplate'])->name('template');
         Route::get('/{role}/export', [\App\Http\Controllers\Admin\UserController::class, 'export'])->name('export');
+        Route::post('/{role}/bulk-destroy', [\App\Http\Controllers\Admin\UserController::class, 'bulkDestroy'])->name('bulk_destroy');
         
         // CRUD Routes
         Route::get('/{role}/create', [\App\Http\Controllers\Admin\UserController::class, 'create'])->name('create');

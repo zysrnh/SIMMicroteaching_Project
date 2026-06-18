@@ -13,9 +13,18 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        <!-- Dark Mode Script (prevent flash) -->
+        <script>
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        </script>
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-slate-50 flex">
+        <div class="min-h-screen bg-slate-50 dark:bg-slate-900 flex transition-colors duration-200">
             <!-- Sidebar Navigation -->
             @include('layouts.sidebar')
 
@@ -25,7 +34,7 @@
 
                 <!-- Page Heading -->
                 @isset($header)
-                    <header class="bg-white shadow-sm border-b border-gray-100 relative z-0">
+                    <header class="bg-white dark:bg-slate-800 shadow-sm border-b border-gray-100 dark:border-slate-700 relative z-0 transition-colors duration-200">
                         <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                             {{ $header }}
                         </div>
@@ -33,7 +42,7 @@
                 @endisset
 
                 <!-- Page Content -->
-                <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-50/50 p-6 animate-fade-in-up">
+                <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-50/50 dark:bg-slate-900 p-6 animate-fade-in-up transition-colors duration-200">
                     {{ $slot }}
                 </main>
             </div>

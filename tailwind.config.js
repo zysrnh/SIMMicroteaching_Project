@@ -3,6 +3,7 @@ import forms from '@tailwindcss/forms';
 
 /** @type {import('tailwindcss').Config} */
 export default {
+    darkMode: 'class',
     content: [
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './storage/framework/views/*.php',
@@ -32,7 +33,7 @@ export default {
                     50: 'oklch(0.97 0.03 260)',
                     500: 'oklch(0.56 0.23 260)',
                     600: 'oklch(0.48 0.20 260)',
-                }
+                },
             },
             keyframes: {
                 'fade-in-up': {

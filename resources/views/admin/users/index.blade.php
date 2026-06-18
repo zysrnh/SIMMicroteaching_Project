@@ -22,27 +22,27 @@
             </div>
             @endif
 
-            <div class="bg-white overflow-hidden shadow-sm rounded border border-gray-100">
-                <div class="p-6 md:p-8 bg-white border-b border-gray-50">
+            <div class="bg-white dark:bg-[#3a3a3a] overflow-hidden shadow-sm rounded border border-gray-100 dark:border-[#484848] transition-colors duration-200">
+                <div class="p-6 md:p-8 bg-white dark:bg-[#3a3a3a] border-b border-gray-50 dark:border-[#484848]">
                     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
                         <div>
-                            <h3 class="text-lg font-bold text-gray-900">Daftar {{ ucfirst($role) }}</h3>
-                            <p class="text-sm text-gray-500">Kelola data, upload excel, dan hapus data {{ $role }}.</p>
+                            <h3 class="text-lg font-bold text-gray-900 dark:text-[#E0E0E0]">Daftar {{ ucfirst($role) }}</h3>
+                            <p class="text-sm text-gray-500 dark:text-[#848484]">Kelola data, upload excel, dan hapus data {{ $role }}.</p>
                         </div>
                         <div class="flex flex-wrap gap-2">
-                            <a href="{{ route('admin.users.create', $role) }}" class="inline-flex items-center px-4 py-2 bg-accent-600 border border-transparent rounded font-semibold text-xs text-white uppercase tracking-widest hover:bg-accent-700 focus:bg-accent-700 active:bg-accent-800 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                            <a href="{{ route('admin.users.create', $role) }}" class="inline-flex items-center px-4 py-2 bg-accent-600 border border-transparent rounded font-semibold text-xs text-white uppercase tracking-widest hover:bg-accent-700 hover:-translate-y-0.5 hover:shadow-md focus:bg-accent-700 active:bg-accent-800 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2 transform transition-all duration-200">
                                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
                                 Tambah Data
                             </a>
-                            <a href="{{ route('admin.users.export', $role) }}" class="inline-flex items-center px-4 py-2 bg-green-600 border border-transparent rounded font-semibold text-xs text-white uppercase tracking-widest shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150">
+                            <a href="{{ route('admin.users.export', $role) }}" class="inline-flex items-center px-4 py-2 bg-green-600 border border-transparent rounded font-semibold text-xs text-white uppercase tracking-widest shadow-sm hover:bg-green-700 hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 disabled:opacity-25 transform transition-all duration-200">
                                 <svg class="w-4 h-4 mr-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                                 Export Data
                             </a>
-                            <a href="{{ route('admin.users.template', $role) }}" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150">
+                            <a href="{{ route('admin.users.template', $role) }}" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 disabled:opacity-25 transform transition-all duration-200">
                                 <svg class="w-4 h-4 mr-2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                                 Template Excel
                             </a>
-                            <button onclick="document.getElementById('importModal').classList.remove('hidden')" class="inline-flex items-center px-4 py-2 bg-primary-600 border border-transparent rounded font-semibold text-xs text-white uppercase tracking-widest hover:bg-primary-700 focus:bg-primary-700 active:bg-primary-800 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                            <button onclick="document.getElementById('importModal').classList.remove('hidden')" class="inline-flex items-center px-4 py-2 bg-primary-600 border border-transparent rounded font-semibold text-xs text-white uppercase tracking-widest hover:bg-primary-700 hover:-translate-y-0.5 hover:shadow-md focus:bg-primary-700 active:bg-primary-800 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transform transition-all duration-200">
                                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
                                 Import Excel
                             </button>
@@ -110,7 +110,18 @@
                                         
                                         <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-600">{{ $user->no_telp ?? '-' }}</td>
                                         <td class="px-4 py-3 whitespace-nowrap text-sm font-medium">
-                                            <a href="{{ route('admin.users.edit', ['role' => $role, 'user' => $user->id]) }}" class="text-accent-600 hover:text-accent-900 bg-accent-50 hover:bg-accent-100 px-3 py-1 rounded transition-colors">Edit</a>
+                                            <div class="flex items-center gap-2">
+                                                <a href="{{ route('admin.users.edit', ['role' => $role, 'user' => $user->id]) }}" class="inline-flex items-center px-3 py-1.5 bg-primary-50 text-primary-700 text-xs font-semibold rounded-md hover:bg-primary-100 hover:-translate-y-0.5 transform transition-all duration-200">
+                                                    Edit
+                                                </a>
+                                                <form action="{{ route('admin.users.destroy', ['role' => $role, 'user' => $user->id]) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="inline-flex items-center px-3 py-1.5 bg-red-50 text-red-700 text-xs font-semibold rounded-md hover:bg-red-100 hover:-translate-y-0.5 transform transition-all duration-200" onclick="return confirm('Yakin ingin menghapus data ini?')">
+                                                        Hapus
+                                                    </button>
+                                                </form>
+                                            </div>
                                         </td>
                                     </tr>
                                 @empty

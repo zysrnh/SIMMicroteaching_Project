@@ -17,10 +17,10 @@
                     <form action="{{ route('admin.users.store', $role) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-3">
                             <!-- Informasi Dasar -->
                             <div class="md:col-span-2">
-                                <h3 class="text-lg font-bold text-gray-900 border-b pb-2 mb-4">Informasi Dasar</h3>
+                                <h3 class="text-lg font-bold text-gray-900 border-b pb-2 mb-1">Informasi Dasar</h3>
                             </div>
 
                             <div>
@@ -49,19 +49,24 @@
 
                             <div class="md:col-span-2">
                                 <x-input-label for="avatar" value="Foto Profil (Opsional)" />
-                                <input id="avatar" name="avatar" type="file" class="mt-1 block w-full text-sm text-gray-500
-                                    file:mr-4 file:py-2 file:px-4
-                                    file:rounded-md file:border-0
-                                    file:text-sm file:font-semibold
-                                    file:bg-primary-50 file:text-primary-700
-                                    hover:file:bg-primary-100" accept="image/*" />
+                                <div class="flex items-center gap-4 mt-2">
+                                    <div class="w-14 h-14 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 border border-gray-200 shadow-sm">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                                    </div>
+                                    <input id="avatar" name="avatar" type="file" class="block w-full text-sm text-gray-500
+                                        file:mr-4 file:py-2 file:px-4
+                                        file:rounded-md file:border-0
+                                        file:text-sm file:font-semibold
+                                        file:bg-primary-50 file:text-primary-700
+                                        hover:file:bg-primary-100" accept="image/*" />
+                                </div>
                                 <x-input-error class="mt-2" :messages="$errors->get('avatar')" />
                             </div>
 
                             <!-- Informasi Akademik -->
                             @if($role !== 'admin')
-                            <div class="md:col-span-2 mt-4">
-                                <h3 class="text-lg font-bold text-gray-900 border-b pb-2 mb-4">Informasi Akademik</h3>
+                            <div class="md:col-span-2 mt-2">
+                                <h3 class="text-lg font-bold text-gray-900 border-b pb-2 mb-1">Informasi Akademik</h3>
                             </div>
                             @endif
 
@@ -105,8 +110,8 @@
                             @endif
 
                             <!-- Keamanan -->
-                            <div class="md:col-span-2 mt-4">
-                                <h3 class="text-lg font-bold text-gray-900 border-b pb-2 mb-4">Keamanan (Password Login)</h3>
+                            <div class="md:col-span-2 mt-2">
+                                <h3 class="text-lg font-bold text-gray-900 border-b pb-2 mb-1">Keamanan (Password Login)</h3>
                             </div>
 
                             <div class="md:col-span-2">
@@ -118,10 +123,10 @@
                         </div>
 
                         <div class="flex items-center justify-end mt-8 pt-6 border-t border-gray-100 gap-3">
-                            <a href="{{ route('admin.users.index', $role) }}" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 transition ease-in-out duration-150">
+                            <a href="{{ route('admin.users.index', $role) }}" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 hover:-translate-y-0.5 transform transition-all duration-200">
                                 Batal
                             </a>
-                            <button type="submit" class="inline-flex items-center px-4 py-2 bg-primary-600 border border-transparent rounded font-semibold text-xs text-white uppercase tracking-widest hover:bg-primary-700 active:bg-primary-800 transition ease-in-out duration-150">
+                            <button type="submit" class="inline-flex items-center px-4 py-2 bg-primary-600 border border-transparent rounded font-semibold text-xs text-white uppercase tracking-widest hover:bg-primary-700 active:bg-primary-800 hover:-translate-y-0.5 hover:shadow-md transform transition-all duration-200">
                                 Simpan Data Baru
                             </button>
                         </div>

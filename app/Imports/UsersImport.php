@@ -25,7 +25,8 @@ class UsersImport implements ToModel
         // Asumsi baris pertama adalah header, kita skip menggunakan fitur `WithStartRow` atau cek index.
         
         // Skip header manual
-        if ($row[0] === 'NIM' || $row[0] === 'NIDN') {
+        // Skip header manual
+        if ($row[0] === 'NIM' || $row[0] === 'NIDN/NIP' || $row[0] === 'NIDN' || str_contains($row[0], 'ID Admin')) {
             return null;
         }
 
@@ -41,7 +42,7 @@ class UsersImport implements ToModel
             'tahun_ajaran' => $this->role === 'mahasiswa' ? ($row[4] ?? null) : null,
             'angkatan'     => $this->role === 'mahasiswa' ? ($row[5] ?? null) : null,
             'no_telp'      => $this->role === 'mahasiswa' ? ($row[6] ?? null) : ($row[2] ?? null),
-            'email'        => $this->role === 'dosen' ? ($row[3] ?? null) : null,
+            'email'        => ($this->role === 'dosen' || $this->role === 'admin') ? ($row[3] ?? null) : null,
             'mata_kuliah'  => $this->role === 'dosen' ? ($row[4] ?? null) : null,
             'prodi'        => $this->role === 'dosen' ? ($row[5] ?? null) : ($this->role === 'mahasiswa' ? ($row[7] ?? null) : null),
         ]);

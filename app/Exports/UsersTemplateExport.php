@@ -24,6 +24,10 @@ class UsersTemplateExport implements FromArray, WithHeadings, WithStyles, Should
             return [
                 ['1234567890', 'Budi Santoso', 'PAI-A', '6', '2025/2026', '2023', '081234567890', 'PAI'],
             ];
+        } elseif ($this->role === 'admin') {
+            return [
+                ['admin01', 'Admin Prodi PAI', '081234567891', 'admin.pai@iaipersis.ac.id'],
+            ];
         } else {
             return [
                 ['0987654321', 'Dr. Siti Aminah, M.Pd.', '081298765432', 'siti@iaipersis.ac.id', 'Microteaching', 'PAI'],
@@ -36,6 +40,10 @@ class UsersTemplateExport implements FromArray, WithHeadings, WithStyles, Should
         if ($this->role === 'mahasiswa') {
             return [
                 'NIM', 'Nama Lengkap', 'Kelas', 'Semester', 'Tahun Ajaran', 'Angkatan', 'No Telp/WA', 'Program Studi'
+            ];
+        } elseif ($this->role === 'admin') {
+            return [
+                'ID Admin / NIP', 'Nama Admin', 'No Telp/WA', 'Email'
             ];
         } else {
             return [

@@ -22,7 +22,7 @@ class UsersTemplateExport implements FromArray, WithHeadings, WithStyles, Should
         // Berikan 1 baris contoh/dummy agar user tahu format isiannya
         if ($this->role === 'mahasiswa') {
             return [
-                ['1234567890', 'Budi Santoso', 'PAI-A', '6', '2025/2026', '2023', '081234567890'],
+                ['1234567890', 'Budi Santoso', 'PAI-A', '6', '2025/2026', '2023', '081234567890', 'PAI'],
             ];
         } else {
             return [
@@ -35,7 +35,7 @@ class UsersTemplateExport implements FromArray, WithHeadings, WithStyles, Should
     {
         if ($this->role === 'mahasiswa') {
             return [
-                'NIM', 'Nama Lengkap', 'Kelas', 'Semester', 'Tahun Ajaran', 'Angkatan', 'No Telp/WA'
+                'NIM', 'Nama Lengkap', 'Kelas', 'Semester', 'Tahun Ajaran', 'Angkatan', 'No Telp/WA', 'Program Studi'
             ];
         } else {
             return [

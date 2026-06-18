@@ -43,7 +43,7 @@ class UsersImport implements ToModel
             'no_telp'      => $this->role === 'mahasiswa' ? ($row[6] ?? null) : ($row[2] ?? null),
             'email'        => $this->role === 'dosen' ? ($row[3] ?? null) : null,
             'mata_kuliah'  => $this->role === 'dosen' ? ($row[4] ?? null) : null,
-            'prodi'        => $this->role === 'dosen' ? ($row[5] ?? null) : null,
+            'prodi'        => $this->role === 'dosen' ? ($row[5] ?? null) : ($this->role === 'mahasiswa' ? ($row[7] ?? null) : null),
         ]);
     }
 }

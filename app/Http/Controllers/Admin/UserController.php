@@ -36,4 +36,58 @@ class UserController extends Controller
         $fileName = 'Template_Import_' . ucfirst($role) . '.xlsx';
         return \Maatwebsite\Excel\Facades\Excel::download(new \App\Exports\UsersTemplateExport($role), $fileName);
     }
+
+    public function edit($role, \App\Models\User $user)
+    {
+        if (!in_array($role, ['dosen', 'mahasiswa']) || $user->role !== $role) {
+            abort(404);
+        }
+        return view('admin.users.edit', compact('user', 'role'));
+    }
+
+    public function update(Request $request, $role, \App\Models\User $user)
+    {
+        if (!in_array($role, ['dosen', 'mahasiswa']) || $user->role !== $role) {
+            abort(404);
+        }
+
+        $rules = [
+            'name' => 'required|string|max:255',
+            'nomor_induk' => 'required|string|max:255|unique:users,nomor_induk,' . $user->id,
+            'email' => 'nullable|email|max:255|unique:users,email,' . $user->id,
+            'no_telp' => 'nullable|string|max:20',
+        ];
+
+        if ($role === 'mahasiswa') {
+            $rules['kelas'] = 'nullable|string|max:255';
+            $rules['semester'] = 'nullable|string|max:255';
+            $rules['tahun_ajaran'] = 'nullable|string|max:255';
+            $rules['angkatan'] = 'nullable|string|max:255';
+            $rules['prodi'] = 'nullable|string|max:255';
+        } else {
+            $rules['mata_kuliah'] = 'nullable|string|max:255';
+            $rules['prodi'] = 'nullable|string|max:255';
+        }
+
+        $validated = $request->validate($rules);
+        
+        // Update password if provided
+        if ($request->filled('password')) {
+            $validated['password'] = bcrypt($request->password);
+        }
+
+        $user->update($validated);
+
+        return redirect()->route('admin.users.index', $role)->with('success', 'Data ' . ucfirst($role) . ' berhasil diperbarui!');
+    }
+
+    public function destroy($role, \App\Models\User $user)
+    {
+        if (!in_array($role, ['dosen', 'mahasiswa']) || $user->role !== $role) {
+            abort(404);
+        }
+
+        $user->delete();
+        return back()->with('success', 'Data ' . ucfirst($role) . ' berhasil dihapus!');
+    }
 }

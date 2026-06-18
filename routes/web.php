@@ -27,6 +27,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/{role}', [\App\Http\Controllers\Admin\UserController::class, 'index'])->name('index');
         Route::post('/{role}/import', [\App\Http\Controllers\Admin\UserController::class, 'import'])->name('import');
         Route::get('/{role}/template', [\App\Http\Controllers\Admin\UserController::class, 'downloadTemplate'])->name('template');
+        
+        // CRUD Routes
+        Route::get('/{role}/{user}/edit', [\App\Http\Controllers\Admin\UserController::class, 'edit'])->name('edit');
+        Route::put('/{role}/{user}', [\App\Http\Controllers\Admin\UserController::class, 'update'])->name('update');
+        Route::delete('/{role}/{user}', [\App\Http\Controllers\Admin\UserController::class, 'destroy'])->name('destroy');
     });
 });
 

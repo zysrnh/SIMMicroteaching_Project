@@ -14,7 +14,7 @@
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm rounded border border-gray-100">
                 <div class="p-6 md:p-8">
-                    <form action="{{ route('admin.users.update', ['role' => $role, 'user' => $user->id]) }}" method="POST">
+                    <form action="{{ route('admin.users.update', ['role' => $role, 'user' => $user->id]) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         
@@ -47,6 +47,20 @@
                                 <x-input-label for="email" value="Email (Opsional)" />
                                 <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" />
                                 <x-input-error class="mt-2" :messages="$errors->get('email')" />
+                            </div>
+
+                            <div class="md:col-span-2">
+                                <x-input-label for="avatar" value="Foto Profil (Opsional)" />
+                                @if ($user->avatar)
+                                    <img src="{{ asset('storage/' . $user->avatar) }}" alt="Avatar" class="w-20 h-20 rounded-full object-cover mb-3">
+                                @endif
+                                <input id="avatar" name="avatar" type="file" class="mt-1 block w-full text-sm text-gray-500
+                                    file:mr-4 file:py-2 file:px-4
+                                    file:rounded-md file:border-0
+                                    file:text-sm file:font-semibold
+                                    file:bg-primary-50 file:text-primary-700
+                                    hover:file:bg-primary-100" accept="image/*" />
+                                <x-input-error class="mt-2" :messages="$errors->get('avatar')" />
                             </div>
 
                             <!-- Informasi Akademik -->

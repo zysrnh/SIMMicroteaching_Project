@@ -60,6 +60,7 @@ class UserController extends Controller
             'email' => 'nullable|email|max:255|unique:users,email',
             'no_telp' => 'nullable|string|max:20',
             'password' => 'required|string|min:6',
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
 
         if ($role === 'mahasiswa') {
@@ -76,6 +77,10 @@ class UserController extends Controller
         $validated = $request->validate($rules);
         $validated['role'] = $role;
         $validated['password'] = bcrypt($validated['password']);
+
+        if ($request->hasFile('avatar')) {
+            $validated['avatar'] = $request->file('avatar')->store('avatars', 'public');
+        }
 
         \App\Models\User::create($validated);
 
@@ -103,6 +108,7 @@ class UserController extends Controller
             'nomor_induk' => 'required|string|max:255|unique:users,nomor_induk,' . $user->id,
             'email' => 'nullable|email|max:255|unique:users,email,' . $user->id,
             'no_telp' => 'nullable|string|max:20',
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
 
         if ($role === 'mahasiswa') {
@@ -121,6 +127,13 @@ class UserController extends Controller
         // Update password if provided
         if ($request->filled('password')) {
             $validated['password'] = bcrypt($request->password);
+        }
+
+        if ($request->hasFile('avatar')) {
+            if ($user->avatar && \Illuminate\Support\Facades\Storage::disk('public')->exists($user->avatar)) {
+                \Illuminate\Support\Facades\Storage::disk('public')->delete($user->avatar);
+            }
+            $validated['avatar'] = $request->file('avatar')->store('avatars', 'public');
         }
 
         $user->update($validated);

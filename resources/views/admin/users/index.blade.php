@@ -69,9 +69,22 @@
                             <tbody class="bg-white divide-y divide-gray-50">
                                 @forelse ($users as $user)
                                     <tr class="hover:bg-slate-50/50 transition-colors">
-                                        <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">{{ $user->nomor_induk ?? '-' }}</td>
-                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-700">
-                                            <div class="font-medium">{{ $user->name }}</div>
+                                        <td class="px-4 py-3 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-10 w-10 mr-3">
+                                                    @if($user->avatar)
+                                                        <img class="h-10 w-10 rounded-full object-cover border border-gray-100 shadow-sm" src="{{ asset('storage/' . $user->avatar) }}" alt="{{ $user->name }}">
+                                                    @else
+                                                        <div class="h-10 w-10 rounded-full bg-primary-100 flex items-center justify-center text-primary-700 font-bold text-sm border border-primary-200">
+                                                            {{ substr($user->name, 0, 1) }}
+                                                        </div>
+                                                    @endif
+                                                </div>
+                                                <div class="text-sm font-medium text-gray-900">{{ $user->nomor_induk ?? '-' }}</div>
+                                            </div>
+                                        </td>
+                                        <td class="px-4 py-3 whitespace-nowrap">
+                                            <div class="text-sm font-medium text-gray-900">{{ $user->name }}</div>
                                             <div class="text-xs text-gray-400">{{ $user->email ?? 'Tidak ada email' }}</div>
                                         </td>
                                         

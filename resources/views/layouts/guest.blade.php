@@ -14,28 +14,31 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans text-primary-900 antialiased bg-slate-50 relative overflow-hidden">
-        <!-- Dekorasi Background -->
-        <div class="absolute top-0 left-0 w-full h-96 bg-primary-600 rounded-b-[4rem] sm:rounded-b-[8rem] opacity-90 z-0"></div>
+    <body class="font-sans text-gray-900 antialiased bg-gray-50 min-h-screen relative flex items-center justify-center selection:bg-indigo-500/30 selection:text-indigo-900">
         
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-12 sm:pt-0 relative z-10">
-            <div class="text-center flex flex-col items-center mb-6">
-                <a href="/">
-                    <div class="bg-white p-3 rounded-2xl shadow-sm mb-4 inline-block">
-                        <img src="{{ asset('images/logo.jpg') }}" alt="Logo IAI Persis" class="w-20 h-20 object-contain rounded-xl" />
+        <div class="relative z-10 w-full max-w-md px-6 py-12 flex flex-col items-center">
+            
+            <!-- Logo & Title -->
+            <div class="text-center mb-8">
+                <a href="/" class="inline-flex flex-col items-center">
+                    <div class="bg-white p-2 rounded shadow-sm mb-4 border border-gray-200">
+                        <img src="{{ asset('images/logo.jpg') }}" alt="Logo IAI Persis" class="w-16 h-16 object-contain" />
                     </div>
+                    <h1 class="text-2xl font-bold text-gray-900 tracking-tight">SIM Microteaching</h1>
+                    <p class="text-gray-500 font-medium text-xs mt-1 uppercase tracking-widest">Institut Agama Islam Persis</p>
                 </a>
-                <h1 class="text-2xl font-bold text-white tracking-tight">SIM Microteaching</h1>
-                <p class="text-primary-100 font-medium text-sm mt-1">Institut Agama Islam Persis</p>
             </div>
 
-            <div class="w-full sm:max-w-md mt-2 px-8 py-8 bg-white shadow-[0_20px_40px_rgba(0,0,0,0.08)] border border-gray-100 overflow-hidden sm:rounded-3xl transition-all duration-300 hover:shadow-[0_20px_50px_rgba(0,0,0,0.12)]">
+            <!-- Login Card -->
+            <div class="w-full bg-white shadow-sm border border-gray-200 rounded overflow-hidden p-8 sm:p-10">
                 {{ $slot }}
             </div>
             
-            <div class="mt-8 text-sm text-primary-600/80 font-medium">
+            <!-- Footer -->
+            <div class="mt-8 text-xs text-gray-500 font-medium tracking-wide">
                 &copy; {{ date('Y') }} IAI Persis. All rights reserved.
             </div>
+            
         </div>
     </body>
 </html>
